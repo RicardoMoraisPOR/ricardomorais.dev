@@ -191,7 +191,7 @@ export const officeSetup: UsesCategory = {
     {
       name: 'Custom build wooden desk',
       description:
-        '4m resin-coated wooden surfaces support by steel beams. Shared with wife setup and Home Server',
+        '4m resin-coated wooden surface supported by steel beams. Shared with wife setup and Home Server',
     },
     { name: 'Naspaluro', description: 'Ergonomic office chair.' },
     { name: 'Yellow Rubber Duck', description: 'Very important.' },
