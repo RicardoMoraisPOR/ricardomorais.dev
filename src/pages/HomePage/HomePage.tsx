@@ -13,7 +13,7 @@ export const HomePage = () => {
       { property: 'og:title', content: title },
       {
         property: 'og:image',
-        content: `/api/og-image?title=${encodeURIComponent(title)}`,
+        content: `/api/og?title=${encodeURIComponent(title)}`,
       },
       { property: 'og:type', content: 'website' },
     ],
