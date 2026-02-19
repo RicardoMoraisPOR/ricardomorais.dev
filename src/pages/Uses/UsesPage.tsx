@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 import { PageTitle } from '@/components/PageTitle';
 import { useGSAP } from '@gsap/react';
+import { useHead } from '@unhead/react';
 import gsap from 'gsap';
 
 import { TechStackGrid } from './TechStackGrid';
@@ -9,6 +10,25 @@ import { UsesSection } from './UsesSection';
 import { development, miscellaneous, officeSetup } from './constants';
 
 export const UsesPage = () => {
+  useHead({
+    title: 'Uses | Ricardo Morais',
+    meta: [
+      {
+        name: 'description',
+        content:
+          'A comprehensive list of the tools, technologies, and hardware I use for personal software development.',
+      },
+      { property: 'og:title', content: 'Uses | Ricardo Morais' },
+
+      {
+        name: 'twitter:description',
+        content:
+          'A comprehensive list of the tools, technologies, and hardware I use for personal software development.',
+      },
+      { name: 'twitter:title', content: 'Uses | Ricardo Morais' },
+    ],
+  });
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {

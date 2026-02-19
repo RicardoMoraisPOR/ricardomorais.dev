@@ -2,6 +2,7 @@ import { GithubSVG } from '@/assets/GithubSVG';
 import { LinkedinSVG } from '@/assets/LinkedinSVG';
 import { PageTitle } from '@/components/PageTitle';
 import { Button } from '@/components/ui/button';
+import { useHead } from '@unhead/react';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router';
 
@@ -9,6 +10,25 @@ import { SectionAnimation } from './SectionAnimation';
 import { WorkExperience } from './WorkExperience';
 
 export const AboutPage = () => {
+  useHead({
+    title: 'About | Ricardo Morais',
+    meta: [
+      {
+        name: 'description',
+        content:
+          "I'm a Software Engineer focused on front-end development, specialized in React and TypeScript.",
+      },
+      { property: 'og:title', content: 'About | Ricardo Morais' },
+
+      {
+        name: 'twitter:description',
+        content:
+          "I'm a Software Engineer focused on front-end development, specialized in React and TypeScript.",
+      },
+      { name: 'twitter:title', content: 'About | Ricardo Morais' },
+    ],
+  });
+
   const { ref, inView } = useInView({
     threshold: 0.2,
   });

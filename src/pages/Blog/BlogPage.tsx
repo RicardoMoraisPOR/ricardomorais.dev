@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { useGSAP } from '@gsap/react';
 import { useQuery } from '@tanstack/react-query';
+import { useHead } from '@unhead/react';
 import gsap from 'gsap';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
@@ -14,6 +15,30 @@ import { fetchBlogPosts } from './FetchRequests';
 import { GARBAGE_COLLECTED_TIME, STALE_TIME } from './utils';
 
 export const BlogPage = () => {
+  useHead({
+    title: 'Blog | Ricardo Morais',
+    meta: [
+      {
+        property: 'og:title',
+        content: 'Blog | Ricardo Morais',
+      },
+      {
+        property: 'og:description',
+        content:
+          'My thoughts on the front-end ecosystem, software engineering and things I find interesting.',
+      },
+      {
+        name: 'twitter:title',
+        content: 'Blog | Ricardo Morais',
+      },
+      {
+        name: 'twitter:description',
+        content:
+          'My thoughts on the front-end ecosystem, software engineering and things I find interesting.',
+      },
+    ],
+  });
+
   const containerRef = useRef<HTMLDivElement>(null);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);

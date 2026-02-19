@@ -15,19 +15,12 @@ export type BlogPost = {
     name: string;
     id: string;
   }>;
+};
+
+export type BlogPostDetails = BlogPost & {
   content: {
     markdown: string;
   };
-};
-
-export type BlogPostDetails = Omit<BlogPost, 'brief'> & {
-  coverImage: {
-    url: string;
-  };
-  seo: Array<{
-    title: string;
-    description: string;
-  }>;
 };
 
 export type Edges<T> = Array<{ node: T; cursor: string }>;

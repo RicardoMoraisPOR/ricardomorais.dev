@@ -33,18 +33,12 @@ query GetPostBySlug($slug: String!) {
   publication(host: "ricardomorais.hashnode.dev") {
     post(slug: $slug) {
       id
-      coverImage {
-        url
-      }
       title
+      brief
       url
       publishedAt
       readTimeInMinutes
       slug
-      seo {
-        title
-        description
-      }
       tags {
         name
         id

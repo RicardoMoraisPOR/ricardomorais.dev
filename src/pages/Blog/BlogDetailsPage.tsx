@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { LoadingState } from '@/components/LoadingState';
 import { useGSAP } from '@gsap/react';
 import { useQuery } from '@tanstack/react-query';
+import { useHead } from '@unhead/react';
 import gsap from 'gsap';
 import { ArrowLeft, LucideLink } from 'lucide-react';
 import Markdown from 'react-markdown';
@@ -26,6 +27,34 @@ export const BlogDetailsPage = () => {
 
     staleTime: STALE_TIME,
     gcTime: GARBAGE_COLLECTED_TIME,
+  });
+
+  const defaultTitle = 'Blog | Ricardo Morais';
+
+  useHead({
+    title: data ? `${data.title} | Ricardo Morais` : defaultTitle,
+    meta: [
+      {
+        property: 'og:title',
+        content: data ? `${data.title} | Ricardo Morais` : defaultTitle,
+      },
+      {
+        property: 'og:description',
+        content: data
+          ? data.brief
+          : 'My thoughts on the front-end ecosystem, software engineering and things I find interesting.',
+      },
+      {
+        name: 'twitter:title',
+        content: data ? `${data.title} | Ricardo Morais` : defaultTitle,
+      },
+      {
+        name: 'twitter:description',
+        content: data
+          ? data.brief
+          : 'My thoughts on the front-end ecosystem, software engineering and things I find interesting.',
+      },
+    ],
   });
 
   useGSAP(() => {

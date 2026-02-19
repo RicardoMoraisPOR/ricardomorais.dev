@@ -1,9 +1,18 @@
+import { useHead } from '@unhead/react';
 import { Link } from 'react-router';
 
 import { LogoTitleAnimation } from './LogoTitleAnimation';
 import { ToolsAnimation } from './ToolsAnimation';
 
 export const HomePage = () => {
+  useHead({
+    title: 'Home | Ricardo Morais',
+    meta: [
+      { property: 'og:title', content: 'Home | Ricardo Morais' },
+      { name: 'twitter:title', content: 'Home | Ricardo Morais' },
+    ],
+  });
+
   return (
     <div className="w-full">
       <LogoTitleAnimation />
