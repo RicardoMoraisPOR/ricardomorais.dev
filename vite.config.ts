@@ -1,22 +1,20 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@assets': '/src/assets',
-      '@components': '/src/components',
-      '@constants': '/src/constants',
-      '@contexts': '/src/contexts',
-      '@hooks': '/src/hooks',
-      '@pages': '/src/pages',
-      '@theme': '/src/theme',
+// https://vite.dev/config/
+export default defineConfig(async () => {
+  return {
+    plugins: [react(), tailwindcss()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
     },
-  },
-  server: {
-    port: 5173,
-    open: true,
-  },
+    server: {
+      port: 5173,
+      open: true,
+    },
+  };
 });

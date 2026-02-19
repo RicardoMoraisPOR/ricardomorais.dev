@@ -1,25 +1,19 @@
-import ImageMyself from '@assets/me.webp';
-import MetaTag from '@components/MetaTag';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { useCallback, useRef } from 'react';
-import {
-  AboutPageWrapper,
-  BioSide,
-  DescriptionText,
-  ExperienceSide,
-  FlexCenter,
-  HeadingContainer,
-  Image,
-  ImageWrapper,
-} from './about.styles';
-import Timeline from './Timeline';
+import { GithubSVG } from '@/assets/GithubSVG';
+import { LinkedinSVG } from '@/assets/LinkedinSVG';
+import { PageTitle } from '@/components/PageTitle';
+import { Button } from '@/components/ui/button';
+import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router';
 
-const AboutPage = () => {
-  const bioRef = useRef<HTMLDivElement>(null);
-  const bioImageRef = useRef<HTMLImageElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const getYearsDifference = useCallback((dateFrom: Date) => {
+import { SectionAnimation } from './SectionAnimation';
+import { WorkExperience } from './WorkExperience';
+
+export const AboutPage = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+  });
+
+  const getYearsDifference = (dateFrom: Date) => {
     const today = new Date();
     let diference = today.getFullYear() - dateFrom.getFullYear();
     const monthDifference = today.getMonth() - dateFrom.getMonth();
@@ -32,100 +26,95 @@ const AboutPage = () => {
     }
 
     return diference;
-  }, []);
-
-  useGSAP(() => {
-    if (bioImageRef.current) {
-      gsap.fromTo(
-        bioImageRef.current,
-        { opacity: 0, y: 70 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'sine.out',
-        }
-      );
-    }
-  }, []);
-
-  useGSAP(() => {
-    if (bioRef.current) {
-      gsap.fromTo(
-        bioRef.current,
-        { opacity: 0, y: 70 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        }
-      );
-    }
-  }, []);
-
-  useGSAP(() => {
-    if (titleRef.current) {
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 70 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        }
-      );
-    }
-  }, []);
+  };
 
   return (
-    <AboutPageWrapper>
-      <MetaTag />
-      <BioSide ref={bioRef}>
-        <ImageWrapper>
-          <Image
-            ref={bioImageRef}
-            src={ImageMyself}
-            alt="Ricardo Morais Dev Face Image"
+    <>
+      <section className="flex flex-col gap-16">
+        <PageTitle
+          brief={`I'm a ${getYearsDifference(new Date(1996, 0, 18))}-year-old Software Engineer focused on front-end development,
+            specialized in React and TypeScript.`}
+          page="About"
+          title="Hello there!"
+          ExtraContent={
+            <div className="flex gap-2">
+              <Button asChild variant={'outline'} size="icon">
+                <Link
+                  to="https://github.com/RicardoMoraisPOR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GithubSVG />
+                </Link>
+              </Button>
+              <Button asChild variant={'outline'} size="icon">
+                <Link
+                  to="https://www.linkedin.com/in/ricardo-dias-morais/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedinSVG />
+                </Link>
+              </Button>
+            </div>
+          }
+        />
+        <div className="flex flex-col gap-16">
+          <SectionAnimation
+            textSide={{
+              title: 'Who am I',
+              texts: [
+                'My name is Ricardo Morais and I was born in Lisbon, Portugal.',
+                'Now living in the island of Madeira, a place I fell in love with and also met my wonderful wife.',
+                'Proud owner of a dog, cat, parrot and various exotic fish!',
+              ],
+            }}
+            imageSide={{
+              image: '/images/me.jpeg',
+              imageAlt: 'Ricardo Morais posing with mountains behind it',
+            }}
           />
-        </ImageWrapper>
-        <br />
-        <DescriptionText>
-          I'm Ricardo Morais, a {getYearsDifference(new Date(1996, 0, 18))}
-          -year-old Front-end developer originally from Lisbon, now living in
-          Madeira Island.
-        </DescriptionText>
-        <DescriptionText>
-          I began my coding career in 2015 when endorsed a 3-year CTE in
-          Computer Systems Management and Programming in Torres Vedras/Lisbon.
-        </DescriptionText>
-        <DescriptionText>
-          Now, with {getYearsDifference(new Date(2018, 6, 1))} years of
-          professional experience, I've worked in both mobile and web
-          development, contributing to projects for large companies nationally
-          and internationally
-        </DescriptionText>
-        <DescriptionText>
-          I focus on delivering results quickly without breaking anything,
-          building a strong foundation that stands the test of time.
-        </DescriptionText>
-        <DescriptionText>
-          I'm a React and Typescript specialist.
-        </DescriptionText>
-      </BioSide>
-      <ExperienceSide>
-        <div ref={titleRef}>
-          <FlexCenter>
-            <HeadingContainer>
-              <h1>Career Timeline</h1>
-            </HeadingContainer>
-          </FlexCenter>
-          <Timeline />
+
+          <SectionAnimation
+            isTextFirst={false}
+            animationDelay={0.1}
+            textSide={{
+              title: 'My Journey',
+              texts: [
+                'I began my coding career in 2015 when I enrolled in a 3-year CTE in Computer Systems Management and Programming.',
+                `I have ${getYearsDifference(new Date(2018, 6, 1))}+ years of
+                professional experience. Throughout my career, I've worked in
+                both mobile and web development, contributing to projects for
+                major companies both nationally and internationally.`,
+              ],
+            }}
+            imageSide={{
+              image: '/images/rubber-duck.png',
+              imageAlt: 'A yellow rubber duck sit in a wooden desk',
+            }}
+          />
+
+          <SectionAnimation
+            animationDelay={0.2}
+            textSide={{
+              title: 'Outside Work',
+              texts: [
+                'Outside of work, I am generally quiet by nature, but I make sure to throw a couple of jokes here and there.',
+                'I enjoy modding retro consoles, chess, and maintaining aquariums, hobbies that bring peace of mind and sharpen my attention to detail.',
+                'Vivid fan of Pokémon.',
+              ],
+            }}
+            imageSide={{
+              image: '/images/aquarium.jpeg',
+              imageAlt: 'Aquarium viewed from the side',
+            }}
+          />
         </div>
-      </ExperienceSide>
-    </AboutPageWrapper>
+      </section>
+      <div className="h-px w-full bg-border my-16" role="separator" />
+      <div ref={ref}>
+        <WorkExperience inView={inView} />
+      </div>
+    </>
   );
 };
-
-export default AboutPage;

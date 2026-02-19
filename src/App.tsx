@@ -1,23 +1,14 @@
-import LoadableComponent from '@components/LoadableComponent';
-import BaseLayout from '@pages/BaseLayout';
-import Page404 from '@pages/Page404';
-import PageTransition from '@pages/PageTransition';
-import { lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { PageTransition } from '@/components/PageTransition';
+import { AboutPage } from '@/pages/About/AboutPage';
+import { BaseLayout } from '@/pages/BaseLayout/BaseLayout';
+import { BlogDetailsPage } from '@/pages/Blog/BlogDetailsPage';
+import { BlogPage } from '@/pages/Blog/BlogPage';
+import { HomePage } from '@/pages/HomePage/HomePage';
+import { NotFoundPage } from '@/pages/NotFound/NotFoundPage';
+import { UsesPage } from '@/pages/Uses/UsesPage';
+import { Route, Routes } from 'react-router';
 
-const HomePage = LoadableComponent(lazy(() => import('@pages/Home/HomePage')));
-const AboutPage = LoadableComponent(
-  lazy(() => import('@pages/About/AboutPage'))
-);
-const ProjectsPage = LoadableComponent(
-  lazy(() => import('@pages/Projects/ProjectsPage'))
-);
-const UsesPage = LoadableComponent(lazy(() => import('@pages/Uses/UsesPage')));
-const ThemePage = LoadableComponent(
-  lazy(() => import('@pages/ThemeEditor/ThemeEditorPage'))
-);
-
-const App = () => {
+export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<BaseLayout />}>
@@ -38,6 +29,22 @@ const App = () => {
           }
         />
         <Route
+          path="blog"
+          element={
+            <PageTransition>
+              <BlogPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="blog/:slug"
+          element={
+            <PageTransition>
+              <BlogDetailsPage />
+            </PageTransition>
+          }
+        />
+        <Route
           path="uses"
           element={
             <PageTransition>
@@ -46,26 +53,10 @@ const App = () => {
           }
         />
         <Route
-          path="projects"
-          element={
-            <PageTransition>
-              <ProjectsPage />
-            </PageTransition>
-          }
-        />
-        <Route
-          path="theme-editor"
-          element={
-            <PageTransition>
-              <ThemePage />
-            </PageTransition>
-          }
-        />
-        <Route
           path="*"
           element={
             <PageTransition>
-              <Page404 />
+              <NotFoundPage />
             </PageTransition>
           }
         />
@@ -73,5 +64,3 @@ const App = () => {
     </Routes>
   );
 };
-
-export default App;

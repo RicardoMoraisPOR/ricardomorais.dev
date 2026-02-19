@@ -1,54 +1,59 @@
-import { Breakpoints, BreakpointTypes } from '@theme/theme.types';
-import { useEffect, useState } from 'react';
-import { DefaultTheme, useTheme } from 'styled-components';
+import { useLayoutEffect, useState } from 'react';
 
-const extractMediaQuery = (fullQuery: string): string | null => {
-  const match = fullQuery.match(/\(([^)]+)\)/);
-  return match ? `(${match[1]})` : null;
+type Breakpoints = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+type UseMediaQueryOptions = {
+  breakpoint: Breakpoints;
+  type?: 'min' | 'max';
 };
 
-const getMediaQuery = (
-  theme: DefaultTheme,
-  type: keyof BreakpointTypes,
-  breakpoint: keyof Breakpoints
-) => {
-  const query = extractMediaQuery(theme.breakpoints[type][breakpoint]);
-  if (query) {
-    return window.matchMedia(query);
+const breakpointMeasurements: Record<Breakpoints, string> = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+};
+
+export function useMediaQuery({
+  breakpoint,
+  type,
+}: UseMediaQueryOptions): boolean {
+  const query = `(${type || 'min'}-width: ${breakpointMeasurements[breakpoint]})`;
+
+  const getMatches = (query: string): boolean => {
+    return window.matchMedia(query).matches;
+  };
+
+  const [matches, setMatches] = useState<boolean>(getMatches(query));
+
+  // Handles the change event of the media query.
+  function handleChange() {
+    setMatches(getMatches(query));
   }
-  return null;
-};
 
-// Hook to check if the current breakpoint is met
-const useMediaQuery = (
-  type: keyof BreakpointTypes,
-  breakpoint: keyof Breakpoints
-) => {
-  const theme = useTheme();
-  const [isMatch, setIsMatch] = useState(false);
+  useLayoutEffect(() => {
+    const matchMedia = window.matchMedia(query);
 
-  useEffect(() => {
-    const handleChange = (event: MediaQueryListEvent) => {
-      setIsMatch(event.matches);
-    };
+    // Triggered at the first client-side load and if query changes
+    handleChange();
 
-    const mediaQueryList = getMediaQuery(theme, type, breakpoint);
-
-    if (mediaQueryList) {
-      // Update the state based on the initial value
-      setIsMatch(mediaQueryList.matches);
-
-      // Listener to update state on change
-      mediaQueryList.addListener(handleChange);
+    // Use deprecated `addListener` and `removeListener` to support Safari < 14 (#135)
+    if (matchMedia.addListener) {
+      matchMedia.addListener(handleChange);
+    } else {
+      matchMedia.addEventListener('change', handleChange);
     }
 
-    // Cleanup function to remove listener
     return () => {
-      mediaQueryList?.removeListener(handleChange);
+      if (matchMedia.removeListener) {
+        matchMedia.removeListener(handleChange);
+      } else {
+        matchMedia.removeEventListener('change', handleChange);
+      }
     };
-  }, [breakpoint, theme, type]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
-  return isMatch;
-};
-
-export default useMediaQuery;
+  return matches;
+}

@@ -1,20 +1,34 @@
-import { CustomThemeProvider } from '@contexts/CustomThemeContext.tsx';
-import { Analytics } from '@vercel/analytics/react';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App.tsx';
+import { StrictMode } from 'react';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <HelmetProvider>
+import { App } from '@/App.tsx';
+import '@/index.css';
+import { ThemeProvider } from '@/lib/ThemeProvider.tsx';
+import { useGSAP } from '@gsap/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { UnheadProvider, createHead } from '@unhead/react/client';
+import { Analytics } from '@vercel/analytics/react';
+import gsap from 'gsap';
+import { ReactLenis } from 'lenis/react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router';
+
+gsap.registerPlugin(useGSAP);
+const head = createHead();
+const queryClient = new QueryClient();
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <UnheadProvider head={head}>
       <BrowserRouter>
-        <CustomThemeProvider>
-          <Analytics />
-          <App />
-        </CustomThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <Analytics />
+            <ReactLenis root>
+              <App />
+            </ReactLenis>
+          </ThemeProvider>
+        </QueryClientProvider>
       </BrowserRouter>
-    </HelmetProvider>
-  </React.StrictMode>
+    </UnheadProvider>
+  </StrictMode>,
 );
