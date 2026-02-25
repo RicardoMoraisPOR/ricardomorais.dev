@@ -13,7 +13,12 @@ import remarkGfm from 'remark-gfm';
 
 import { fetchBlogPost } from './FetchRequests';
 import { MarkdownComponents } from './MarkdownComponents';
-import { GARBAGE_COLLECTED_TIME, STALE_TIME, formatDate } from './utils';
+import {
+  GARBAGE_COLLECTED_TIME,
+  LenisAnchors,
+  STALE_TIME,
+  formatDate,
+} from './utils';
 
 export const BlogDetailsPage = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -168,6 +173,7 @@ export const BlogDetailsPage = () => {
       />
 
       <article ref={contentRef}>
+        <LenisAnchors />
         <Markdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}

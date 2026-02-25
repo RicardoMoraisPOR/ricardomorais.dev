@@ -1,27 +1,30 @@
 import type { Components } from 'react-markdown';
+
 import {
-  TitleElement,
+  AnchorElement,
+  BlockquoteElement,
+  ImageElement,
+  ListElement,
+  OrderedListElement,
+  SectionSubTitleElement,
+  SeparatorElement,
   SubTitleElement,
   TextElement,
-  AnchorElement,
-  ListElement,
-  BlockquoteElement,
-  SeparatorElement,
-  OrderedListElement,
-  ImageElement,
+  TitleElement,
 } from './SimpleComponents';
 import { CodeElement } from './SyntaxHighlightComponent';
 import {
-  TableElement,
+  TDElement,
+  THElement,
   THeadElement,
   TRElement,
-  THElement,
-  TDElement,
+  TableElement,
 } from './TableElementComponent';
 
 export const MarkdownComponents: Components = {
   h1: TitleElement,
   h2: SubTitleElement,
+  h3: SectionSubTitleElement,
   p: TextElement,
   a: AnchorElement,
   ul: ListElement,

@@ -1,11 +1,13 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
+import { generateId } from '../utils';
+
 type PProps = ComponentPropsWithoutRef<'p'>;
 
 export const TextElement = (props: PProps) => {
   return (
     <p
-      className="text-base text-muted-foreground leading-relaxed mb-0.5"
+      className="text-base text-muted-foreground leading-relaxed my-2"
       {...props}
     />
   );
@@ -13,14 +15,35 @@ export const TextElement = (props: PProps) => {
 
 type H1Props = ComponentPropsWithoutRef<'h1'>;
 
-export const TitleElement = (props: H1Props) => {
-  return <h1 className="text-3xl mb-2 mt-8" {...props} />;
+export const TitleElement = ({ children, ...props }: H1Props) => {
+  const id = typeof children === 'string' ? generateId(children) : undefined;
+  return (
+    <h1 id={id} className="text-3xl mb-2 mt-8" {...props}>
+      {children}
+    </h1>
+  );
 };
 
 type H2Props = ComponentPropsWithoutRef<'h2'>;
 
-export const SubTitleElement = (props: H2Props) => {
-  return <h2 className="text-xl mb-2 mt-8" {...props} />;
+export const SubTitleElement = ({ children, ...props }: H2Props) => {
+  const id = typeof children === 'string' ? generateId(children) : undefined;
+  return (
+    <h2 id={id} className="text-xl mb-2 mt-8" {...props}>
+      {children}
+    </h2>
+  );
+};
+
+type H3Props = ComponentPropsWithoutRef<'h3'>;
+
+export const SectionSubTitleElement = ({ children, ...props }: H3Props) => {
+  const id = typeof children === 'string' ? generateId(children) : undefined;
+  return (
+    <h3 id={id} className="text-lg mb-2 mt-8" {...props}>
+      {children}
+    </h3>
+  );
 };
 
 type ULProps = ComponentPropsWithoutRef<'ul'>;
@@ -28,7 +51,7 @@ type ULProps = ComponentPropsWithoutRef<'ul'>;
 export const ListElement = (props: ULProps) => {
   return (
     <ul
-      className="list-disc pl-6 space-y-2 text-muted-foreground py-2"
+      className="list-disc pl-6 space-y-2 text-muted-foreground py-2 ml-2"
       {...props}
     />
   );
@@ -39,7 +62,7 @@ type OLProps = ComponentPropsWithoutRef<'ol'>;
 export const OrderedListElement = (props: OLProps) => {
   return (
     <ol
-      className="list-decimal pl-6 space-y-2 text-muted-foreground py-2"
+      className="list-decimal pl-6 space-y-2 text-muted-foreground py-2 ml-2"
       {...props}
     />
   );
