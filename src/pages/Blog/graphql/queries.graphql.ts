@@ -1,6 +1,7 @@
 export const HASHNODE_BLOG_POSTS_QUERY = `
 query GetPosts($after: String) {
   publication(host: "ricardomorais.hashnode.dev") {
+    id
     posts(first: 4, after: $after) {
       edges {
         node {
@@ -31,6 +32,7 @@ query GetPosts($after: String) {
 export const HASHNODE_BLOG_POST_QUERY_BY_SLUG = `
 query GetPostBySlug($slug: String!) {
   publication(host: "ricardomorais.hashnode.dev") {
+    id
     post(slug: $slug) {
       id
       title
