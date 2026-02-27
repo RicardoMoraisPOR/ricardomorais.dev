@@ -34,7 +34,7 @@ export const ToolsAnimation = () => {
           y: 0,
           x: 0,
           duration: 0.4,
-          stagger: 0.08,
+          stagger: 0.04,
           ease: 'back.inOut',
         },
       );

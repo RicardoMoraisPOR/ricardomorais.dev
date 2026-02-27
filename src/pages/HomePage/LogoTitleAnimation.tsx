@@ -11,12 +11,12 @@ export const LogoTitleAnimation = () => {
     if (titleRef.current) {
       gsap.fromTo(
         titleRef.current,
-        { opacity: 0, x: 60 },
+        { opacity: 0, x: 90 },
         {
           opacity: 1,
           x: 0,
-          duration: 1.4,
-          ease: 'circ.inOut',
+          duration: 1,
+          ease: 'power3.inOut',
         },
       );
     }
@@ -34,9 +34,9 @@ export const LogoTitleAnimation = () => {
       { x: 160 },
       {
         x: 0,
-        delay: 0.8,
+        delay: 0.4,
         duration: 0.7,
-        ease: 'circ.out',
+        ease: 'power2.inOut',
       },
     );
 

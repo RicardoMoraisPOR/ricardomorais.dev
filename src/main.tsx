@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
     <UnheadProvider head={head}>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <ThemeProvider>
             <Analytics />
             <ReactLenis root>
               <App />

@@ -1,13 +1,12 @@
 import { useRef, useState } from 'react';
 
+import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
 import gsap from 'gsap';
 import { FolderOpen, Home, User, Wrench } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
-
-import { ThemeToggle } from './ModeToggle';
 
 const navLinks = [
   { label: 'Home', href: '/', icon: Home },
@@ -120,7 +119,7 @@ export const HeaderMenu = () => {
         })}
         <div className="mx-1 h-5 w-px bg-border/60" aria-hidden="true" />
         <div className="flex items-center justify-center rounded-full bg-card/90 p-1 z-10">
-          <ThemeToggle />
+          <AnimatedThemeToggler />
         </div>
       </div>
     </nav>

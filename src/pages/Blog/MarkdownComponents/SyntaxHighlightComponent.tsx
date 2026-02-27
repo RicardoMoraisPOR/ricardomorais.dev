@@ -21,7 +21,7 @@ export const CodeElement = ({
   style,
   ...rest
 }: CodeProps) => {
-  const theme = useTheme();
+  const { darkMode } = useTheme();
   const [copied, setCopied] = useState(false);
 
   const match = /language-(\w+)/.exec(className || '');
@@ -54,7 +54,7 @@ export const CodeElement = ({
         }}
         PreTag="div"
         language={match[1]}
-        style={theme.darkMode ? atelierForestDark : atelierForestLight}
+        style={darkMode ? atelierForestDark : atelierForestLight}
         {...rest}
       >
         {codeString}

@@ -11,7 +11,7 @@ type ThemeProviderProps = {
 export const ThemeProvider = ({
   children,
   defaultTheme = 'system',
-  storageKey = 'vite-ui-theme',
+  storageKey = 'theme',
   ...props
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(
@@ -69,7 +69,6 @@ export const ThemeProvider = ({
       (theme === 'system' &&
         window.matchMedia('(prefers-color-scheme: dark)').matches),
     setTheme: (newTheme: Theme) => {
-      localStorage.setItem(storageKey, newTheme);
       setTheme(newTheme);
     },
   };
