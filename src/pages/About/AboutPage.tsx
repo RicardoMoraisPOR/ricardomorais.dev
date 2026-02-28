@@ -4,6 +4,7 @@ import { LinkedinSVG } from '@/assets/LinkedinSVG';
 import { StyledLink } from '@/components/LinkHover';
 import { PageTitle } from '@/components/PageTitle';
 import { Button } from '@/components/ui/button';
+import { STALE_TIME } from '@/utils/utils';
 import { useQuery } from '@tanstack/react-query';
 import { useHead } from '@unhead/react';
 import { useInView } from 'react-intersection-observer';
@@ -54,7 +55,7 @@ export const AboutPage = () => {
   const { data: chessRating, isLoading } = useQuery({
     queryKey: ['leaderboard', 'tactics', 'PT', 'top50'],
     queryFn: fetchChessDotComPlayerHighestStat,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: STALE_TIME,
   });
 
   return (
