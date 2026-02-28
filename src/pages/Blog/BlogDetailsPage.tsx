@@ -1,6 +1,13 @@
 import { useRef } from 'react';
 
+import { fetchBlogPost } from '@/api/FetchRequests';
 import { LoadingState } from '@/components/LoadingState';
+import {
+  GARBAGE_COLLECTED_TIME,
+  LenisAnchors,
+  STALE_TIME,
+  formatDate,
+} from '@/utils/utils';
 import { useGSAP } from '@gsap/react';
 import { useQuery } from '@tanstack/react-query';
 import { useHead } from '@unhead/react';
@@ -11,14 +18,7 @@ import { Link, useParams } from 'react-router';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
-import { fetchBlogPost } from './FetchRequests';
 import { MarkdownComponents } from './MarkdownComponents';
-import {
-  GARBAGE_COLLECTED_TIME,
-  LenisAnchors,
-  STALE_TIME,
-  formatDate,
-} from './utils';
 
 export const BlogDetailsPage = () => {
   const containerRef = useRef<HTMLElement>(null);

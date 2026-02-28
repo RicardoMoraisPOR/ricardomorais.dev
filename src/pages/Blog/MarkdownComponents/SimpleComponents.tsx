@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef } from 'react';
 
-import { generateId } from '../utils';
+import { generateId } from '@/utils/utils';
 
 type PProps = ComponentPropsWithoutRef<'p'>;
 
@@ -78,7 +78,7 @@ export const AnchorElement = ({ href, children, ...props }: AnchorProps) => {
       href={href}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
-      className="text-primary underline underline-offset-4 hover:opacity-80 transition"
+      className="underline decoration-primary/30 underline-offset-4 text-muted-foreground hover:decoration-foreground transition-colors hover:text-foreground"
       {...props}
     >
       {children}

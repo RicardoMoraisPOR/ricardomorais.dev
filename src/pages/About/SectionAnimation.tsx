@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { type ReactNode, useRef } from 'react';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useGSAP } from '@gsap/react';
@@ -12,7 +12,7 @@ type SectionImageProps = {
 
 type SectionTextProps = {
   title: string;
-  texts: Array<string>;
+  texts: Array<ReactNode>;
 };
 
 type SectionAnimationProps = {

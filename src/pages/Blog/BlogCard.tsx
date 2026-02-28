@@ -1,8 +1,7 @@
+import type { BlogPost } from '@/api/FetchRequests';
+import { formatDate } from '@/utils/utils';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router';
-
-import type { BlogPost } from './FetchRequests';
-import { formatDate } from './utils';
 
 type BlogCardProps = {
   data: BlogPost;

@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react';
 
+import { fetchBlogPosts } from '@/api/FetchRequests';
 import { LoadingState } from '@/components/LoadingState';
 import { PageTitle } from '@/components/PageTitle';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
+import { GARBAGE_COLLECTED_TIME, STALE_TIME } from '@/utils/utils';
 import { useGSAP } from '@gsap/react';
 import { useQuery } from '@tanstack/react-query';
 import { useHead } from '@unhead/react';
@@ -11,8 +13,6 @@ import gsap from 'gsap';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import { BlogCard } from './BlogCard';
-import { fetchBlogPosts } from './FetchRequests';
-import { GARBAGE_COLLECTED_TIME, STALE_TIME } from './utils';
 
 export const BlogPage = () => {
   useHead({

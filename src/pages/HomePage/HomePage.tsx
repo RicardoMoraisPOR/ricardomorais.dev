@@ -1,5 +1,5 @@
+import { StyledLink } from '@/components/LinkHover';
 import { useHead } from '@unhead/react';
-import { Link } from 'react-router';
 
 import { LogoTitleAnimation } from './LogoTitleAnimation';
 import { ToolsAnimation } from './ToolsAnimation';
@@ -23,14 +23,14 @@ export const HomePage = () => {
             Software Engineer
           </strong>
           {', currently working at '}
-          <Link
+          <StyledLink
             to="https://www.santander.com/"
-            className="font-semibold text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground transition-colors"
+            className="font-semibold text-foreground"
             target="_blank"
             rel="noopener noreferrer"
           >
             Bank Santander
-          </Link>
+          </StyledLink>
           {
             '. I work with forward-thinking people to design and build clean, high-performant and accessible '
           }

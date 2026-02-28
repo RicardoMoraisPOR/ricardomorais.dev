@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 
+import { StyledLink } from '@/components/LinkHover';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
@@ -171,14 +172,14 @@ export const WorkExperience = ({ inView }: WorkExperienceProps) => {
                       <>
                         <span className="text-muted-foreground/50">{'/'}</span>
                         {entry.companyLink ? (
-                          <a
-                            href={entry.companyLink}
+                          <StyledLink
+                            to={entry.companyLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-base text-muted-foreground transition-colors hover:text-foreground"
+                            className="inline-flex items-center gap-1 text-base"
                           >
                             {entry.companyName}
-                          </a>
+                          </StyledLink>
                         ) : (
                           <span className="text-base text-muted-foreground">
                             {entry.companyName}

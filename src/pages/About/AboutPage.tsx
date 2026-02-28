@@ -1,7 +1,10 @@
+import { fetchChessDotComPlayerHighestStat } from '@/api/FetchRequests';
 import { GithubSVG } from '@/assets/GithubSVG';
 import { LinkedinSVG } from '@/assets/LinkedinSVG';
+import { StyledLink } from '@/components/LinkHover';
 import { PageTitle } from '@/components/PageTitle';
 import { Button } from '@/components/ui/button';
+import { useQuery } from '@tanstack/react-query';
 import { useHead } from '@unhead/react';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router';
@@ -47,6 +50,12 @@ export const AboutPage = () => {
 
     return diference;
   };
+
+  const { data: chessRating, isLoading } = useQuery({
+    queryKey: ['leaderboard', 'tactics', 'PT', 'top50'],
+    queryFn: fetchChessDotComPlayerHighestStat,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
 
   return (
     <>
@@ -120,7 +129,27 @@ export const AboutPage = () => {
               title: 'Outside Work',
               texts: [
                 'Outside of work, I am generally quiet by nature, but I make sure to throw a couple of jokes here and there.',
-                'I enjoy modding retro consoles, chess, and maintaining aquariums, hobbies that bring peace of mind and sharpen my attention to detail.',
+                <>
+                  In my free time, I mod retro consoles, maintain aquariums, and
+                  play chess, I’m currently ranked in the{' '}
+                  <StyledLink
+                    to="https://www.chess.com/leaderboard/tactics?country=PT"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Top 50 leaderboard
+                  </StyledLink>{' '}
+                  in Portugal for Chess.com tactics (puzzle solving) with a
+                  highest rating of{' '}
+                  <StyledLink
+                    to="https://www.chess.com/member/ricardodiasmorais/stats/puzzles"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {isLoading ? 'Loading...' : <>{chessRating} ELO</>}
+                  </StyledLink>
+                  .
+                </>,
                 'Vivid fan of Pokémon.',
               ],
             }}
