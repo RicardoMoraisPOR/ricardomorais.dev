@@ -120,9 +120,9 @@ export const development: UsesCategory = {
       description: 'The default WT app with oh-my-bash framework.',
     },
     {
-      name: 'Vivaldi Browser',
+      name: 'Zen Browser',
       description:
-        'Highly customizable web browser, configured to have the most focus setup possible.',
+        'A calm, minimal and privacy-focused web browser designed for distraction-free navigation.',
     },
     {
       name: 'Figma',

@@ -95,7 +95,7 @@ export const AboutPage = () => {
               title: 'Who am I',
               texts: [
                 'My name is Ricardo Morais and I was born in Lisbon, Portugal.',
-                'Now living in the island of Madeira, a place I fell in love with and also met my wonderful wife.',
+                'Now living in Madeira Island, a place I fell in love with and also met my wonderful wife.',
                 'Proud owner of a dog, cat, parrot and various exotic fish!',
               ],
             }}

@@ -1,4 +1,4 @@
-import type { BlogPost } from '@/api/FetchRequests';
+import type { BlogPost } from '@/data/blog-posts';
 import { formatDate } from '@/utils/utils';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router';

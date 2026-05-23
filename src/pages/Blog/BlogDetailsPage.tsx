@@ -27,8 +27,8 @@ export const BlogDetailsPage = () => {
 
   const { slug } = useParams<{ slug: string }>();
   const { data, isLoading, error } = useQuery({
-    queryKey: ['hashnode-post-details', slug],
-    queryFn: fetchBlogPost(slug || ''),
+    queryKey: ['blog-post-details', slug],
+    queryFn: () => fetchBlogPost(slug || ''),
 
     staleTime: STALE_TIME,
     gcTime: GARBAGE_COLLECTED_TIME,
@@ -136,9 +136,6 @@ export const BlogDetailsPage = () => {
     );
   }
 
-  // Strip out any trailing ' align="..."' from the URL
-  const cleanMarkdown = data.content.markdown.replace(/ align=".*?"/g, '');
-
   return (
     <>
       <header ref={containerRef} className="flex flex-col gap-4">
@@ -179,7 +176,7 @@ export const BlogDetailsPage = () => {
           rehypePlugins={[rehypeRaw]}
           components={MarkdownComponents}
         >
-          {cleanMarkdown}
+          {data.content}
         </Markdown>
         <div className="flex justify-center items-center gap-5 my-10">
           <Link
@@ -196,7 +193,7 @@ export const BlogDetailsPage = () => {
             rel="noopener noreferrer"
           >
             <LucideLink className="h-3.5 w-3.5" />
-            See this post in Hashnode
+            See this post in dev.to
           </Link>
         </div>
       </article>
