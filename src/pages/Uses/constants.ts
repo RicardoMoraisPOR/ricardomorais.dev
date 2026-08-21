@@ -116,8 +116,12 @@ export const development: UsesCategory = {
         'Primary code editor, with a minimal setup and a handful of extensions.',
     },
     {
-      name: 'Windows Terminal + Bash',
-      description: 'The default WT app with oh-my-bash framework.',
+      name: 'Fedora Workstation',
+      description: 'Main operating system for daily development work.',
+    },
+    {
+      name: 'Zsh + oh-my-zsh',
+      description: 'Main terminal shell.',
     },
     {
       name: 'Zen Browser',
@@ -130,11 +134,6 @@ export const development: UsesCategory = {
         'For design and prototyping UI/UX work. Also to create/edit new icons.',
     },
     {
-      name: 'Bruno',
-      description:
-        'Minimal open-source API client for testing and managing API requests locally.',
-    },
-    {
       name: 'Github',
       description: 'Code hosting and versioning.',
     },
@@ -145,11 +144,6 @@ export const development: UsesCategory = {
     {
       name: 'Vercel',
       description: 'Cloud platform for project build and deploying.',
-    },
-    {
-      name: 'V0',
-      description:
-        'AI tool for generating UI code, mostly use it for UI inspiration.',
     },
     {
       name: 'Notion',
