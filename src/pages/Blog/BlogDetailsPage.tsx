@@ -12,7 +12,7 @@ import { useGSAP } from '@gsap/react';
 import { useQuery } from '@tanstack/react-query';
 import { useHead } from '@unhead/react';
 import gsap from 'gsap';
-import { ArrowLeft, LucideLink } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Markdown from 'react-markdown';
 import { Link, useParams } from 'react-router';
 import rehypeRaw from 'rehype-raw';
@@ -185,15 +185,6 @@ export const BlogDetailsPage = () => {
           >
             <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
             Back to Blog
-          </Link>
-          <Link
-            to={data.url}
-            className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground w-fit"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LucideLink className="h-3.5 w-3.5" />
-            See this post in dev.to
           </Link>
         </div>
       </article>
