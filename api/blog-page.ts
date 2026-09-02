@@ -3,10 +3,13 @@ import { AUTHOR, SITE_URL } from '../src/data/site.js';
 import { injectPostMeta } from '../src/lib/blogMeta.js';
 
 export default async function handler(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const slug = searchParams.get('slug') ?? '';
+  const origin = `${request.headers.get('x-forwarded-proto') ?? 'https'}://${
+    request.headers.get('x-forwarded-host') ?? request.headers.get('host')
+  }`;
+  const requestUrl = new URL(request.url, origin);
+  const slug = requestUrl.searchParams.get('slug') ?? '';
 
-  const shellResponse = await fetch(new URL('/', request.url));
+  const shellResponse = await fetch(new URL('/', requestUrl));
   const html = await shellResponse.text();
 
   const post = findPostMetadataBySlug(slug);
