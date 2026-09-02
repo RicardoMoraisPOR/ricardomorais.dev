@@ -1,5 +1,6 @@
-import { OgLogoMark } from '@/lib/ogLogo';
 import { ImageResponse } from '@vercel/og';
+
+import { OgLogoMark } from '../src/lib/ogLogo';
 
 const BACKGROUND = '#0a0a0a';
 const FOREGROUND = '#fafafa';
