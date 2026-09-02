@@ -7,7 +7,7 @@ const FOREGROUND = '#fafafa';
 const MUTED_FOREGROUND = '#a3a3a3';
 const BORDER = 'rgba(255, 255, 255, 0.14)';
 
-export default async function handler(request: Request) {
+export async function GET(request: Request) {
   const searchParams = new URLSearchParams(request.url.split('?')[1] ?? '');
 
   const title = (searchParams.get('title') ?? 'Ricardo Morais — Blog').slice(

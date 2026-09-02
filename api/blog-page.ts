@@ -2,7 +2,7 @@ import { findPostMetadataBySlug } from '../src/data/posts/registry.js';
 import { AUTHOR, SITE_URL } from '../src/data/site.js';
 import { injectPostMeta } from '../src/lib/blogMeta.js';
 
-export default async function handler(request: Request) {
+export async function GET(request: Request) {
   const origin = `${request.headers.get('x-forwarded-proto') ?? 'https'}://${
     request.headers.get('x-forwarded-host') ?? request.headers.get('host')
   }`;
