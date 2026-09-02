@@ -1,6 +1,6 @@
-import { findPostMetadataBySlug } from '../src/data/posts/registry';
-import { AUTHOR, SITE_URL } from '../src/data/site';
-import { injectPostMeta } from '../src/lib/blogMeta';
+import { findPostMetadataBySlug } from '../src/data/posts/registry.js';
+import { AUTHOR, SITE_URL } from '../src/data/site.js';
+import { injectPostMeta } from '../src/lib/blogMeta.js';
 
 export default async function handler(request: Request) {
   const { searchParams } = new URL(request.url);
