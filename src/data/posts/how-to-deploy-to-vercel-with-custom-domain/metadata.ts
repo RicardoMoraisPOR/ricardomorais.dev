@@ -6,13 +6,12 @@ export const metadata: BlogPostMetadata = {
   brief:
     'A comprehensive guide on hosting your application on Vercel, connecting a custom domain, and configuring DNS correctly.',
   slug: 'how-to-deploy-to-vercel-with-custom-domain',
-  url: 'https://dev.to/ricardomorais/how-to-host-your-application-on-vercel-with-a-custom-domain-25on',
   publishedAt: new Date('2025-05-23').toISOString(),
   readTimeInMinutes: 8,
   tags: [
-    { name: 'Vercel', id: 'tag-1' },
-    { name: 'Deployment', id: 'tag-2' },
-    { name: 'DNS', id: 'tag-3' },
-    { name: 'Web Hosting', id: 'tag-4' },
+    { name: 'Vercel', id: 'vercel' },
+    { name: 'Deployment', id: 'deployment' },
+    { name: 'DNS', id: 'dns' },
+    { name: 'Web Hosting', id: 'web-hosting' },
   ],
 };

@@ -1,8 +1,19 @@
+import { siteGraph, toJsonLd } from '@/lib/schema';
 import DotGrid from '@/pages/BaseLayout/DotGridBackground';
 import { HeaderMenu } from '@/pages/BaseLayout/HeaderMenu';
+import { useHead } from '@unhead/react';
 import { Outlet } from 'react-router';
 
 export const BaseLayout = () => {
+  useHead({
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: toJsonLd(siteGraph),
+      },
+    ],
+  });
+
   return (
     <div className="relative w-full min-h-screen bg-background">
       <div className="fixed inset-0 pointer-events-none">

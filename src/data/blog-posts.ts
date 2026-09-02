@@ -3,7 +3,6 @@ export type BlogPostMetadata = {
   title: string;
   brief: string;
   slug: string;
-  url: string;
   publishedAt: string;
   readTimeInMinutes: number;
   tags: Array<{

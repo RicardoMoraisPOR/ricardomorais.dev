@@ -1,5 +1,7 @@
 > In this guide, we'll walk through exactly how to host your application on [**Vercel**](https://vercel.com), connect a custom domain, and configure DNS the right way. No hand-wavy steps. No skipped details. Just a clear, practical walkthrough from deployment to a live, secure URL.
 
+_Vercel and GoDaddy occasionally tweak their dashboards, so a button label or screen layout below might shift slightly over time. The underlying flow, import a repo, add a domain, point two DNS records, has stayed the same._
+
 Before we jump in, there's one important thing to understand:
 
 ## You don't actually need a custom domain to publish your website
@@ -8,7 +10,7 @@ Most hosting providers (including **Vercel**), automatically generate a default 
 
 `your-project-name.vercel.app`
 
-It's fast, It works, and for many projects, it's completely fine.
+It's fast, it works, and for many projects, it's completely fine.
 
 ## Step-by-step instructions
 
@@ -16,17 +18,17 @@ It's fast, It works, and for many projects, it's completely fine.
 
 ### Step 1: Create a Vercel Account and Import Your Repository
 
-1. Go to [https://vercel.com/signup](https://vercel.com/signup) and create an account, after that, you will redirected to [https://vercel.com/new](https://vercel.com/new), that screen has the option to import a Git Repository.
+1. Go to [https://vercel.com/signup](https://vercel.com/signup) and create an account. After that, you'll be redirected to [https://vercel.com/new](https://vercel.com/new), which has the option to import a Git Repository.
 
-![Vercel Import Git Repository](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/azkdp1md16famf5y744i.png)
+![Vercel Import Git Repository](/images/blog/how-to-deploy-to-vercel-with-custom-domain/vercel-import-git-repository.webp)
 
 2. Select **Continue with GitHub** and then grant **Vercel** permission to access your repositories.
 
 3. After that, **Vercel** will ask you to install their GitHub application. After installing, **you should have a list of all your repositories**.
 
-   ![Github Install Application Request](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1gqcwm69wuye0an70c6g.png)
+   ![Github Install Application Request](/images/blog/how-to-deploy-to-vercel-with-custom-domain/github-install-application-request.webp)
 
-   ![Github Permissions Request](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tc6kbqn3qvpowbwl67zn.png)
+   ![Github Permissions Request](/images/blog/how-to-deploy-to-vercel-with-custom-domain/github-permissions-request.webp)
 
 4. Click **Import** on the repository you want to deploy.
 
@@ -40,7 +42,7 @@ It's fast, It works, and for many projects, it's completely fine.
 
 6. After clicking **Deploy** with a successful build (even if it doesn't, you are still allowed to visit your project dashboard), you will be greeted with your project dashboard.
 
-![Vercel Congratulations Deploy Screen](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6ayrsunz4kpstvfjsxns.png)
+![Vercel Congratulations Deploy Screen](/images/blog/how-to-deploy-to-vercel-with-custom-domain/vercel-deploy-success.webp)
 
 ### And that's it.
 
@@ -64,7 +66,7 @@ Now let's talk about what we're really here for: **configuring your custom domai
 
 Vercel will now display two DNS records you need to configure for your domain: one **A record** pointing your root domain (`@`) to Vercel's IP address, and one **CNAME record** that routes the `www` subdomain to your Vercel deployment URL.
 
-**Keep this tab open we'll use those values in the next steps.**
+**Keep this tab open, you'll need those values in the next steps.**
 
 ---
 
@@ -111,7 +113,7 @@ If it doesn't exist:
 
 ### Step 2: Configure the CNAME Record (www)
 
-Next, we'll connect the `www` version of your domain. This will make the traffic from `www.yourdomain.com` to be routed correctly without needing to expose a direct IP address.
+Next, we'll connect the `www` version of your domain. This routes traffic from `www.yourdomain.com` to your deployment correctly, without needing to expose a direct IP address.
 
 What we're essentially saying is: `www.yourdomain.com → yourproject.vercel.app`
 
@@ -131,6 +133,4 @@ To configure it:
 
 We've updated **GoDaddy's** DNS records to tell the internet where our website lives.
 
-This DNS changes usually propagate **within 5–10 minutes**, but in some cases it can take up to an hour. Once propagation completes, your custom domain will be fully connected to your **Vercel** project, with **automatic SSL handled** for you.
-
-### Your app is now live, on your own domain.
+These DNS changes usually propagate **within 5–10 minutes**, but in some cases it can take up to an hour. Once propagation completes, your custom domain will be fully connected to your **Vercel** project, with **automatic SSL handled** for you.

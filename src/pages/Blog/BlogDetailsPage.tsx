@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 import { fetchBlogPost } from '@/api/FetchRequests';
 import { LoadingState } from '@/components/LoadingState';
+import { buildBlogPostingGraph, toJsonLd } from '@/lib/schema';
 import {
   GARBAGE_COLLECTED_TIME,
   LenisAnchors,
@@ -18,7 +19,9 @@ import { Link, useParams } from 'react-router';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
+import { AuthorBio } from './AuthorBio';
 import { MarkdownComponents } from './MarkdownComponents';
+import { RelatedPosts } from './RelatedPosts';
 
 export const BlogDetailsPage = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -60,6 +63,14 @@ export const BlogDetailsPage = () => {
           : 'My thoughts on the front-end ecosystem, software engineering and things I find interesting.',
       },
     ],
+    script: data
+      ? [
+          {
+            type: 'application/ld+json',
+            innerHTML: toJsonLd(buildBlogPostingGraph(data)),
+          },
+        ]
+      : [],
   });
 
   useGSAP(() => {
@@ -130,7 +141,7 @@ export const BlogDetailsPage = () => {
           className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground w-fit"
         >
           <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
-          Back to blog
+          Back to Blog
         </Link>
       </div>
     );
@@ -139,12 +150,21 @@ export const BlogDetailsPage = () => {
   return (
     <>
       <header ref={containerRef} className="flex flex-col gap-4">
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          <time dateTime={data.publishedAt} className="font-mono">
-            {formatDate(data.publishedAt)}
-          </time>
-          <span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
-          <span>{data.readTimeInMinutes} min read</span>
+        <div className="flex flex-col gap-1.5 text-sm text-muted-foreground sm:flex-row sm:items-center sm:gap-3">
+          <AuthorBio />
+          <span className="hidden h-1 w-1 shrink-0 rounded-full bg-muted-foreground/50 sm:block" />
+          <div className="flex items-center gap-3">
+            <time
+              dateTime={data.publishedAt}
+              className="whitespace-nowrap font-mono"
+            >
+              {formatDate(data.publishedAt)}
+            </time>
+            <span className="h-1 w-1 shrink-0 rounded-full bg-muted-foreground/50" />
+            <span className="whitespace-nowrap">
+              {data.readTimeInMinutes} min read
+            </span>
+          </div>
         </div>
         <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl text-balance">
           {data.title}
@@ -178,6 +198,7 @@ export const BlogDetailsPage = () => {
         >
           {data.content}
         </Markdown>
+        <RelatedPosts currentPost={data} />
         <div className="flex justify-center items-center gap-5 my-10">
           <Link
             to="/blog"

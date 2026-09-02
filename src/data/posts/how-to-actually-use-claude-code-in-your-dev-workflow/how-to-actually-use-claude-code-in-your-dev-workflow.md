@@ -12,12 +12,15 @@ The single highest-leverage thing you can do is write a [`CLAUDE.md`](https://co
 
 ```markdown
 ## Commits
+
 Never commit or push without asking first.
 
 ## Conventions
+
 We use feature-based folders, not type-based. Match the existing pattern.
 
 ## Style
+
 Don't add comments explaining what the code does. The code should read on its own.
 ```
 
