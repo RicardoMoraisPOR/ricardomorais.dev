@@ -1,5 +1,9 @@
 import { findPostMetadataBySlug } from '../src/data/posts/registry.js';
-import { AUTHOR, SITE_URL } from '../src/data/site.js';
+import {
+  AUTHOR,
+  SITE_URL,
+  getBlogPostPreviewImageUrl,
+} from '../src/data/site.js';
 import { injectPostMeta } from '../src/lib/blogMeta.js';
 
 export async function GET(request: Request) {
@@ -21,13 +25,7 @@ export async function GET(request: Request) {
     });
   }
 
-  const ogImageParams = new URLSearchParams({
-    title: post.title,
-    readTime: String(post.readTimeInMinutes),
-  });
-  post.tags.forEach((tag) => ogImageParams.append('tag', tag.name));
-
-  const imageUrl = `${SITE_URL}/api/og?${ogImageParams.toString()}`;
+  const imageUrl = getBlogPostPreviewImageUrl(post.slug);
 
   const modifiedHtml = injectPostMeta(html, {
     title: `${post.title} | ${AUTHOR.name}`,

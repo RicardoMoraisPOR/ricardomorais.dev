@@ -1,5 +1,5 @@
 import type { BlogPost } from '@/data/blog-posts';
-import { AUTHOR, DEFAULT_PREVIEW_IMAGE_URL, SITE_URL } from '@/data/site';
+import { AUTHOR, SITE_URL, getBlogPostPreviewImageUrl } from '@/data/site';
 
 const PERSON_ID = `${SITE_URL}/about#person`;
 
@@ -35,7 +35,7 @@ export const buildBlogPostingGraph = (post: BlogPost) => {
         datePublished: post.publishedAt,
         author: { '@id': PERSON_ID },
         publisher: { '@id': PERSON_ID },
-        image: DEFAULT_PREVIEW_IMAGE_URL,
+        image: getBlogPostPreviewImageUrl(post.slug),
         mainEntityOfPage: {
           '@type': 'WebPage',
           '@id': postUrl,

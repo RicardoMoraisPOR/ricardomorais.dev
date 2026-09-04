@@ -12,3 +12,6 @@ export const AUTHOR = {
 };
 
 export const DEFAULT_PREVIEW_IMAGE_URL = `${SITE_URL}/website-preview.png`;
+
+export const getBlogPostPreviewImageUrl = (slug: string) =>
+  `${SITE_URL}/images/blog/${slug}/blog-preview.png`;
