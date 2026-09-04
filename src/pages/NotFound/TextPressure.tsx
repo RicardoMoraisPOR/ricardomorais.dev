@@ -138,11 +138,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
   const styleElement = useMemo(() => {
     return (
       <style>{`
-        @font-face {
-          font-family: 'Compressa VF';
-          src: url('https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2');
-          font-style: normal;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap');
         .stroke span {
           position: relative;
           color: --color-primary;
@@ -169,7 +165,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
         ref={titleRef}
         className={`text-pressure-title ${className} flex justify-between uppercase text-center`}
         style={{
-          fontFamily: 'Compressa VF',
+          fontFamily: "'Roboto Flex'",
           fontSize: fontSize,
           lineHeight,
           transform: `scale(1, ${scaleY})`,
